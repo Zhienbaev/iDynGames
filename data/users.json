@@ -1,0 +1,25 @@
+[
+  {
+    "username": "aidyn@mail.ru",
+    "password": "123456",
+    "refCode": "saef125ad",
+    "Balance": 12
+  },
+  {
+    "username": "admin@mail.ru",
+    "password": "adminpass",
+    "refCode": "efwf789ade",
+    "Balance": 1
+  },
+  {
+    "username": "user@mail.ru",
+    "password": "qwerty",
+    "refCode": "acax845aed",
+    "Balance": 100
+  },
+  {
+    "username": "aidynzhienbaev@gmail.com",
+    "Balance": 0,
+    "refCode": "ypE&%deA"
+  }
+]
