@@ -24,16 +24,20 @@ function generateRandomCode(length = 10): string {
   }
   return result
 }
+interface authModel {
+  providers: any,
+  pages: any,
+  callbacks: any
+}
 
-export const authOptions = {
+
+const authOptions: authModel = {
   providers: [
-    // ✅ Google вход
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!
     }),
 
-    // ✅ Локальный вход по username и password
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -57,7 +61,7 @@ export const authOptions = {
   ],
 
   pages: {
-    signIn: "/auth/login" // твоя страница входа
+    signIn: "/auth/login" 
   },
 
   callbacks: {
@@ -73,14 +77,13 @@ export const authOptions = {
           refCode: `${code}`
         })
 
-        // Перезаписываем файл
         fs.writeFileSync(
           path.join(process.cwd(), 'data', 'users.json'),
           JSON.stringify(users, null, 2)
         )
 
 
-        console.log("🆕 Добавлен пользователь через Google:", user.email)
+        console.log(" Добавлен :", user.email)
       }
 
       return true
@@ -88,7 +91,7 @@ export const authOptions = {
     async jwt({ token, user }: { token: JWT; user?: User }) {
 
       if (user) {
-        token.sub = user.email ?? '' // или user.id
+        token.sub = user.email ?? ''
       }
       return token
     },
@@ -101,7 +104,7 @@ export const authOptions = {
 
 
       if (session.user && exists) {
-        session.user.email = exists.refCode // или другое поле
+        session.user.email = exists.refCode
         session.user.image = exists.Balance
       }
       return session
