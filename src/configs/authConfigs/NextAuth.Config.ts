@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   pages: {
-    signIn: "/auth/login" // твоя кастомная страница входа
+    signIn: "/auth/login"
   },
   callbacks: {
     async signIn({ user }) {
@@ -45,30 +45,27 @@ export const authOptions: NextAuthOptions = {
           refCode: `${code}`
         })
 
-        // Перезаписываем файл
+
         fs.writeFileSync(
           path.join(process.cwd(), 'data', 'users.json'),
           JSON.stringify(users, null, 2)
         )
 
-        console.log("🆕 Добавлен пользователь через Google:", user.email)
+        console.log(" Добавлен", user.email)
       }
 
       return true
     },
     async redirect({ url, baseUrl }) {
-      // ✅ Перенаправление после входа
-      return baseUrl // на главную страницу
+      return baseUrl 
     },
     async session({ session, token, user }) {
-      // ✅ Добавим email в session.user
       if (session?.user) {
         session.user.email = token.email
       }
       return session
     },
     async jwt({ token, account, profile }) {
-      // Сохраняем email в токене
       if (account && profile?.email) {
         token.email = profile.email
       }
