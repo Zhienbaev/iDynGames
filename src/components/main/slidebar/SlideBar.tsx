@@ -3,7 +3,8 @@ import { Stack, Typography } from "@mui/material";
 import { LayoutGridIcon, Receipt, StickyNote } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
 
@@ -11,8 +12,19 @@ import { useState } from "react";
 
 export function SlideBar() {
 
-    const [page, setPage] = useState("bank")
+    
+    const [page, setPage] = useState("main")
     const [isHover, setIsHover] = useState(false)
+
+    const pathname = usePathname()
+         useEffect(() => {
+        if (pathname === '/') {
+          setPage('main')
+        } else {
+          setPage('balance')
+        } 
+      }, [pathname])
+
     return (
         <Stack
             onMouseEnter={() => setIsHover(true)}
