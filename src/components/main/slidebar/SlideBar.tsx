@@ -21,7 +21,7 @@ export function SlideBar() {
         if (pathname === '/') {
           setPage('main')
         } else {
-          setPage('balance')
+          setPage('bank')
         } 
       }, [pathname])
 
